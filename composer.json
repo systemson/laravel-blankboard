@@ -1,0 +1,37 @@
+{
+    "name": "systemson/laravel-blankboard",
+    "description": "Base project for laravel develops",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Deivi Peña",
+            "email": "systemson@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Systemson\\Blankboard\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^8.0@dev"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.6.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Systemson\\Blankboard\\ServiceProvider"
+            ],
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "process-timeout": 0
+    }
+}
