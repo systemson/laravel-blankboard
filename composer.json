@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "illuminate/support": "^8.0@dev"
+        "illuminate/support": "^7.0"
     },
     "extra": {
         "branch-alias": {
