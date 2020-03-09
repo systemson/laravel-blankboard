@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
-Auth::routes();
+Route::prefix('admin')->namespace('Systemson\Blankboard\App\Controllers')->group(function () {
+	Route::get('/', 'AdminController@index')->name('admin');
+});
