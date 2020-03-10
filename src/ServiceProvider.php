@@ -21,7 +21,7 @@ class ServiceProvider extends ParentProvider
         $this->loadViewsFrom(__DIR__.'/resources/views', 'blankboard');
 
         $this->publishes([
-            __DIR__.'/public' => public_path('vendor/blankboard'),
+            __DIR__.'/public' => public_path(),
         ], 'public');
     }
 }
