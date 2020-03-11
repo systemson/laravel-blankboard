@@ -10,15 +10,21 @@
       <div class="col-12">
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h5 class="m-0">Title</h5>
-            {!! $resources->create !!}
+            <h5 class="card-title">Title</h5>
+            <div class="card-tools">
+              <ul class="nav nav-pills ml-auto">
+                <li class="nav-item">
+                  {!! $resources->create !!}
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="card-body">
             <table class="table table-bordered table-striped table-hover table-sm">
               <thead class="bg-primary">
                 <tr>
                   @foreach ($resources->headers as $th)
-                    <th class="text-center" scope="col">{{ __($th) }}</th>
+                    <th class="text-center" scope="col">{{ __('table.' . $th) }}</th>
                   @endforeach
                 </tr>
               </thead>

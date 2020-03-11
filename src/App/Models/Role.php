@@ -2,9 +2,9 @@
 
 namespace Systemson\Blankboard\App\Models;
 
-class User extends Model
+class Role extends Model
 {
-    const BASE_ROUTE_NAME = 'admin.users';
+    const BASE_ROUTE_NAME = 'admin.roles';
 
     const CREATE_ROUTE_NAME   = self::BASE_ROUTE_NAME . '.create';
     const STORE_ROUTE_NAME    = self::BASE_ROUTE_NAME . '.store';
@@ -20,8 +20,7 @@ class User extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'description',
         'status',
     ];
 
@@ -31,8 +30,7 @@ class User extends Model
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        //
     ];
 
     /**
@@ -41,7 +39,7 @@ class User extends Model
      * @var array
      */
     protected $appends = [
-        //'status',
+        'status',
     ];
 
     /**
@@ -51,7 +49,7 @@ class User extends Model
      */
     protected $listable = [
         'name',
-        'email',
+        'description',
         'status',
     ];
 

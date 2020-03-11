@@ -3,14 +3,14 @@
 namespace Systemson\Blankboard\App\Controllers;
 
 use App\Http\Controllers\Controller;
-use Systemson\Blankboard\App\Models\User as Model;
+use Systemson\Blankboard\App\Models\Role as Model;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 /**
  * 
  */
-class UsersController extends Controller
+class RolesController extends Controller
 {
     protected $handler;
 
@@ -18,6 +18,7 @@ class UsersController extends Controller
     {
         $this->handler = $handler;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -69,7 +70,7 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Model $user)
+    public function show(Model $role)
     {
         return abort(404);
     }

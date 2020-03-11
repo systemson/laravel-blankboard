@@ -4,15 +4,23 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-Auth::routes();
 
 Route::middleware('web')
-->prefix('admin')
-->name('admin.')
-->namespace('Systemson\Blankboard\App\Controllers')
 ->group(function () {
-    Route::get('/', 'AdminController@index')->name('home');
+
+    Route::namespace('App\Http\Controllers')
+    ->group(function () {
+        Auth::routes();
+    });
+
+    Route::prefix('admin')
+    ->name('admin.')
+    ->namespace('Systemson\Blankboard\App\Controllers')
+    ->group(function () {
+        Route::get('/', 'AdminHomeController@index')->name('home');
 
 
-    Route::resource('/users', 'UsersController');
+        Route::resource('/users', 'UsersController')->except(['show']);
+        Route::resource('/roles', 'RolesController')->except(['show']);
+    });
 });
