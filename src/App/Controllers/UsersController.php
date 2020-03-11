@@ -4,7 +4,7 @@ namespace Systemson\Blankboard\App\Controllers;
 
 use App\Http\Controllers\Controller;
 use Systemson\Blankboard\App\Models\User as Model;
-use Illuminate\Support\Facades\Route;
+USE Systemson\Blankboard\App\Crud\Listing;
 use Illuminate\Http\Request;
 
 /**
@@ -12,12 +12,8 @@ use Illuminate\Http\Request;
  */
 class UsersController extends Controller
 {
-    protected $handler;
+    protected $baseRoute = 'admin.users';
 
-    public function __construct(ResourceListing $handler)
-    {
-        $this->handler = $handler;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -25,16 +21,16 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $resources = $this->handler->list(Model::class, $request);
-
-        $resources->headers = array_merge((new Model())->getListable(), ['actions']);
-
-        if (Route::has(Model::CREATE_ROUTE_NAME)) {
-            $resources->create = '<a class="btn btn-success" href="' . route(Model::CREATE_ROUTE_NAME) . '">New</a>';
-        }
+        $table = Listing::get(
+            new Model(),
+            $request,
+            [
+                'base_route' => $this->baseRoute,
+            ]
+        );
 
         return view('blankboard::admin.list')
-            ->with('resources', $resources)
+            ->with('table', $table)
         ;
     }
 

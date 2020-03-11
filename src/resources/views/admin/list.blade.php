@@ -14,7 +14,7 @@
             <div class="card-tools">
               <ul class="nav nav-pills ml-auto">
                 <li class="nav-item">
-                  {!! $resources->create !!}
+                  {!! $table->getCreateButton() !!}
                 </li>
               </ul>
             </div>
@@ -23,25 +23,25 @@
             <table class="table table-bordered table-striped table-hover table-sm">
               <thead class="bg-primary">
                 <tr>
-                  @foreach ($resources->headers as $th)
+                  @foreach ($table->getTableHeaders() as $th)
                     <th class="text-center" scope="col">{{ __('table.' . $th) }}</th>
                   @endforeach
                 </tr>
               </thead>
               <tbody>
-                @foreach ($resources as $resource)
+                @foreach ($table as $row)
                 <tr>
-                  @foreach ($resources->headers as $th)
-                    <td>{!! $resource->{$th} !!}</td>
+                  @foreach ($table->getTableHeaders() as $th)
+                    <td>{!! $row->{$th} !!}</td>
                   @endforeach
                 </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
-          @if ($resources->isNotEmpty ())
+          @if ($table->isNotEmpty ())
           <div class="card-footer">
-            {{ $resources->links() }}
+            {{ $table->links() }}
           </div>
           @endif
         </div>
