@@ -4,6 +4,7 @@ namespace Systemson\Blankboard\App\Controllers;
 
 use App\Http\Controllers\Controller;
 use Systemson\Blankboard\App\Models\User as Model;
+use Systemson\Blankboard\App\Crud\Form;
 USE Systemson\Blankboard\App\Crud\Listing;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class UsersController extends Controller
     public function create()
     {
         return view('blankboard::admin.form')
-            ->with('resource', new Model())
+            ->with('form', new Form(new Model(), $this->baseRoute))
         ;
     }
 
@@ -54,9 +55,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->handler->new(Model::class, $request);
+        $model =  new Model();
 
-        return redirect()->back();
+        $input = $request->only($model->getFillable());
+
+        $model->fill($input);
+
+        $model->save();
+
+        return redirect()->route($this->baseRoute . '.index');
     }
 
     /**
@@ -79,7 +86,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         return view('blankboard::admin.form')
-            ->with('resource', Model::findOrFail($id))
+            ->with('form', new Form(Model::findOrFail($id), $this->baseRoute))
         ;
     }
 
@@ -92,7 +99,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->handler->edit(Model::findOrFail($id), $request);
+        $model =  Model::findOrFail($id);
+
+        $input = $request->only($model->getFillable());
+
+        $model->fill($input);
+
+        $model->save();
 
         return redirect()->back();
     }

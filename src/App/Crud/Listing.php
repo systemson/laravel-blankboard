@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Route;
 
+
+/**
+ * @todo Should move LengthAwarePaginator functionality to a new class.
+ * 		 And this class should just handle the queries.
+ */
 class Listing extends LengthAwarePaginator
 {
 	protected $model;

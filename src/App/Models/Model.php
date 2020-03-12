@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Http\Request;
 use Form;
+use Illuminate\Support\Facades\Validator;
 
 abstract class Model extends LaravelModel
 {
@@ -25,6 +26,19 @@ abstract class Model extends LaravelModel
      * @var array
      */
     protected $validations = [];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function(LaravelModel $model){
+            $model->validate();
+        });
+
+        self::updating(function(LaravelModel $model){
+            $model->validate();
+        });
+    }
 
     private function isCreatable()
     {
@@ -63,9 +77,9 @@ abstract class Model extends LaravelModel
         return implode(' ', $actions ?? []);
     }
 
-    public function validate(Request $request)
+    public function validate()
     {
-    	if (empty($validations)) {
+    	if (empty($this->getValidations())) {
     		return true;
     	}
 

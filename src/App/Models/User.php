@@ -61,6 +61,7 @@ class User extends Model
      * @var array
      */
     protected $validations = [
-        //
+        'name' => 'required',
+        'password' => 'required',
     ];
 }

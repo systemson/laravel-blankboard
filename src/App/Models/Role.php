@@ -59,6 +59,8 @@ class Role extends Model
      * @var array
      */
     protected $validations = [
-        //
+        'name' => 'required',
+        'description' => 'nullable',
+        'status' => 'required',
     ];
 }

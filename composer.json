@@ -10,6 +10,12 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/systemson/laravel-model-validations"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Systemson\\Blankboard\\": "src/"
@@ -18,7 +24,8 @@
     "require": {
         "illuminate/support": "^7.0",
         "laravel/ui": "^2.0",
-        "laravelcollective/html": "^6.1"
+        "laravelcollective/html": "^6.1",
+        "systemson/laravel-model-validations": "^0.1.0@dev"
     },
     "extra": {
         "branch-alias": {
