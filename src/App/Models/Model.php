@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Http\Request;
 use Form;
-use Illuminate\Support\Facades\Validator;
+use Systemson\LaravelValidations\ValidatorTrait;
 
 abstract class Model extends LaravelModel
 {
-	use FormAccessible;
+	use FormAccessible, ValidatorTrait;
 
     /**
      * The attributes that should be shown in lists.
@@ -19,26 +19,6 @@ abstract class Model extends LaravelModel
      * @var array
      */
     protected $listable = [];
-
-    /**
-     * The attributes validations rules.
-     *
-     * @var array
-     */
-    protected $validations = [];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        self::creating(function(LaravelModel $model){
-            $model->validate();
-        });
-
-        self::updating(function(LaravelModel $model){
-            $model->validate();
-        });
-    }
 
     private function isCreatable()
     {
@@ -75,42 +55,6 @@ abstract class Model extends LaravelModel
         }
 
         return implode(' ', $actions ?? []);
-    }
-
-    public function validate()
-    {
-    	if (empty($this->getValidations())) {
-    		return true;
-    	}
-
-        Validator::make(
-            $this->getAttributes(),
-            $this->getValidations()
-        )->validate();
-
-        return true;
-    }
-
-    public function getValidations()
-    {
-        if (empty($this->validations) || !$this->exists) {
-            return $this->validations;
-        }
-
-        return array_map(function ($rule) {
-            if (\Str::contains($rule, ['unique'])) {
-                preg_match("/(?<=unique:)(.*?)(?=\|)/", $rule, $match);
-                $search = end($match);
-
-                $id = $this->{$this->primaryKey};
-
-                $replace = "{$search},{$id},{$this->primaryKey}";
-
-                $rule = str_replace($search, $replace, $rule);
-            }
-
-            return $rule;
-        }, $this->validations);
     }
 
     public function getListable(): array
