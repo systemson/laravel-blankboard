@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Http\Request;
 use Form;
-use Systemson\LaravelValidations\ValidatorTrait;
+use Systemson\LaravelValidations\ValidationsTrait;
 
 abstract class Model extends LaravelModel
 {
-	use FormAccessible, ValidatorTrait;
+	use FormAccessible, ValidationsTrait;
 
     /**
      * The attributes that should be shown in lists.
