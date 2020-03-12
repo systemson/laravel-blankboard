@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Http\Request;
 use Form;
-use Systemson\LaravelValidations\ValidationsTrait;
+use Systemson\ModelValidations\ValidationsTrait;
 
 abstract class Model extends LaravelModel
 {
