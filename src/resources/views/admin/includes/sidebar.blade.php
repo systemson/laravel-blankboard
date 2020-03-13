@@ -24,7 +24,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{ route('admin.home') }}" class="nav-link">
-            <i class="nav-icon fas fa-circle"></i>
+            <i class="nav-icon fas fa-home"></i>
             <p>
               Home
             </p>
@@ -44,6 +44,14 @@
             <i class="nav-icon fas fa-user"></i>
             <p>
               Roles
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('admin.permissions.index') }}" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Permissions
             </p>
           </a>
         </li>

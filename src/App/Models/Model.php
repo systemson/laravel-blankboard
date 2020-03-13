@@ -11,7 +11,7 @@ use Systemson\ModelValidations\ValidationsTrait;
 
 abstract class Model extends LaravelModel
 {
-	use FormAccessible, ValidationsTrait;
+    use FormAccessible, ValidationsTrait;
 
     /**
      * The attributes that should be shown in lists.
@@ -43,15 +43,32 @@ abstract class Model extends LaravelModel
     public function getActionsAttribute()
     {
         if ($this->isShowable()) {
-            $actions[] = '<a href="' .  route(static::SHOW_ROUTE_NAME, $this->{$this->getKeyName()}) . '" class="btn btn-xs btn-info"> <i class="far fa-eye"></i></a>';
+            $actions[] = '<a href="' .
+                route(static::SHOW_ROUTE_NAME, $this->{$this->getKeyName()}) .
+                '" class="btn btn-xs btn-info"> <i class="far fa-eye"></i></a>'
+            ;
         }
 
         if ($this->isEditable()) {
-            $actions[] = '<a href="' .  route(static::EDIT_ROUTE_NAME, $this->{$this->getKeyName()}) . '" class="btn btn-xs btn-primary"> <i class="far fa-edit"></i></a>';
+            $actions[] = '<a href="' .
+            route(static::EDIT_ROUTE_NAME, $this->{$this->getKeyName()}) .
+            '" class="btn btn-xs btn-primary"> <i class="far fa-edit"></i></a>'
+            ;
         }
 
         if ($this->isDeletable()) {
-            $actions[] = '<a class="btn btn-xs btn-danger"  href="#" onclick="event.preventDefault();document.getElementById(\'delete-form-' . $this->getKey() .'\').submit();"><i class="fas fa-trash"></i>' . Form::open(['route' => [static::DELETE_ROUTE_NAME, $this->getKey()], 'method' => 'DELETE', 'id' => 'delete-form-' . $this->getKey()]) . '</form></a>';
+            $actions[] = '<a class="btn btn-xs btn-danger"  href="#"' .
+                'onclick="event.preventDefault();document.getElementById(\'delete-form-' .
+                $this->getKey() .
+                '\').submit();"><i class="fas fa-trash"></i>' .
+                Form::open([
+                    'route' => [
+                        static::DELETE_ROUTE_NAME,
+                        $this->getKey()
+                    ],
+                    'method' => 'DELETE',
+                    'id' => 'delete-form-' . $this->getKey()
+                ]) . '</form></a>';
         }
 
         return implode(' ', $actions ?? []);

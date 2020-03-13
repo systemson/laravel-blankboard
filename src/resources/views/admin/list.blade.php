@@ -11,6 +11,7 @@
         <div class="card card-primary card-outline">
           <div class="card-header">
             <h5 class="card-title">Title</h5>
+            @if ($table->isCreateble())
             <div class="card-tools">
               <ul class="nav nav-pills ml-auto">
                 <li class="nav-item">
@@ -18,6 +19,7 @@
                 </li>
               </ul>
             </div>
+            @endif
           </div>
           <div class="card-body">
             <table class="table table-bordered table-striped table-hover table-sm">
