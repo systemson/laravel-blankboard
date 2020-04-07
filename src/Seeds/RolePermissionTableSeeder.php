@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use DB;
 use Carbon\Carbon;
 
-class UserRoleTableSeeder extends Seeder
+class RolePermissionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,10 @@ class UserRoleTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_role')->insert([
+        DB::table('role_permission')->insert([
             [
-                'user_id' => 1,
                 'role_id' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'role_id' => 2,
+                'permission_id' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],

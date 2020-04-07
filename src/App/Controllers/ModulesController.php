@@ -3,16 +3,16 @@
 namespace Systemson\Blankboard\App\Controllers;
 
 use App\Http\Controllers\Controller;
-use Systemson\Blankboard\App\Models\Permission as Model;
+use Systemson\Blankboard\App\Models\Module as Model;
 
 /**
  * 
  */
-class PermissionsController extends Controller
+class ModulesController extends Controller
 {
     use ResourceCrud;
 
-    protected $baseRoute = 'admin.permissions';
+    protected $baseRoute = 'admin.modules';
 
     protected $modelClass = Model::class;
 }

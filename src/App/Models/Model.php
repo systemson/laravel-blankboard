@@ -11,7 +11,7 @@ use Systemson\ModelValidations\ValidationsTrait;
 
 abstract class Model extends LaravelModel
 {
-    use FormAccessible, ValidationsTrait;
+	use FormAccessible, ValidationsTrait;
 
     /**
      * The attributes that should be shown in lists.
@@ -19,25 +19,26 @@ abstract class Model extends LaravelModel
      * @var array
      */
     protected $listable = [];
-
+/*
     private function isCreatable()
     {
-        return Route::has(static::CREATE_ROUTE_NAME) && Route::has(static::STORE_ROUTE_NAME);
+        return $this->hasAction('create');
     }
 
     private function isShowable()
     {
-        return Route::has(static::SHOW_ROUTE_NAME);
+        dd($this->hasAction('create'));
+        return $this->hasAction('read');
     }
 
     public function isEditable()
     {
-        return Route::has(static::EDIT_ROUTE_NAME) && Route::has(static::UPDATE_ROUTE_NAME);
+        return $this->hasAction('update');
     }
 
     public function isDeletable()
     {
-        return Route::has(static::DELETE_ROUTE_NAME);
+        return $this->hasAction('delete');
     }
 
     public function getActionsAttribute()
@@ -57,8 +58,7 @@ abstract class Model extends LaravelModel
         }
 
         if ($this->isDeletable()) {
-            $actions[] = '<a class="btn btn-xs btn-danger"  href="#"' .
-                'onclick="event.preventDefault();document.getElementById(\'delete-form-' .
+            $actions[] = '<a class="btn btn-xs btn-danger"  href="#" onclick="event.preventDefault();document.getElementById(\'delete-form-' .
                 $this->getKey() .
                 '\').submit();"><i class="fas fa-trash"></i>' .
                 Form::open([
@@ -74,6 +74,13 @@ abstract class Model extends LaravelModel
         return implode(' ', $actions ?? []);
     }
 
+    public function hasAction($action): bool
+    {
+        dd($this->actions, $action);
+        return in_array($action, $this->actions);
+    }
+*/
+
     public function getListable(): array
     {
         return array_merge([$this->getKeyName()], $this->listable);
@@ -83,7 +90,6 @@ abstract class Model extends LaravelModel
     {
         return $this->listable ?? '*';
     }
-
     public function getStatusAttribute($value)
     {
         if (!in_array('status', $this->listable)) {

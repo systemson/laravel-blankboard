@@ -25,31 +25,12 @@ class Role extends Model
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'status',
-    ];
-
-    /**
      * The attributes that should be shown in lists.
      *
      * @var array
      */
     protected $listable = [
         'name',
-        'description',
         'status',
     ];
 

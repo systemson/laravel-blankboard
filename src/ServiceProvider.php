@@ -5,7 +5,7 @@ namespace Systemson\Blankboard;
 use Illuminate\Support\ServiceProvider as ParentProvider;
 
 /**
- *
+ * 
  */
 class ServiceProvider extends ParentProvider
 {

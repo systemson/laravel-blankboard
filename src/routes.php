@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
+
 Route::middleware('web')
 ->group(function () {
 
@@ -23,6 +25,7 @@ Route::middleware('web')
             Route::resource('/users', 'UsersController')->except(['show']);
             Route::resource('/roles', 'RolesController')->except(['show']);
             Route::resource('/permissions', 'PermissionsController')->except(['show', 'create', 'store', 'destroy']);
+            Route::resource('/modules', 'ModulesController')->except(['show', 'create', 'store', 'destroy']);
         //});
     });
 });

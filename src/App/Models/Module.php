@@ -2,9 +2,9 @@
 
 namespace Systemson\Blankboard\App\Models;
 
-class User extends Model
+class module extends Model
 {
-    const BASE_ROUTE_NAME = 'admin.users';
+    const BASE_ROUTE_NAME = 'admin.module';
 
     const CREATE_ROUTE_NAME   = self::BASE_ROUTE_NAME . '.create';
     const STORE_ROUTE_NAME    = self::BASE_ROUTE_NAME . '.store';
@@ -20,19 +20,12 @@ class User extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'description',
         'status',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
+        'can_create',
+        'can_read',
+        'can_update',
+        'can_delete',
     ];
 
     /**
@@ -42,8 +35,23 @@ class User extends Model
      */
     protected $listable = [
         'name',
-        'email',
         'status',
+        'can_create',
+        'can_read',
+        'can_update',
+        'can_delete',
+    ];
+
+    /**
+     * The avaliable actions for this model.
+     *
+     * @var array
+     */
+    protected $actions = [
+        //'create',
+        //'read',
+        'update',
+        //'delete',
     ];
 
     /**
@@ -52,7 +60,6 @@ class User extends Model
      * @var array
      */
     protected $validations = [
-        'name' => 'required',
-        'password' => 'required',
+        //
     ];
 }

@@ -7,7 +7,7 @@ use Systemson\Blankboard\App\Crud\Listing;
 use Systemson\Blankboard\App\Crud\Form;
 
 /**
- *
+ * 
  */
 trait ResourceCrud
 {
@@ -18,11 +18,12 @@ trait ResourceCrud
      */
     public function index(Request $request)
     {
-        $table = Listing::get(
-            new $this->modelClass,
+
+        $table = (new Listing(new $this->modelClass))->getTable(
             $request,
             [
                 'base_route' => $this->baseRoute,
+                'actions' => $this->actions,
             ]
         );
 

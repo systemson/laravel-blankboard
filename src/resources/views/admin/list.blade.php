@@ -15,35 +15,58 @@
             <div class="card-tools">
               <ul class="nav nav-pills ml-auto">
                 <li class="nav-item">
-                  {!! $table->getCreateButton() !!}
+                  <a class="btn btn-success" href="{{ $table->getCreateUrl() }}">New</a>
                 </li>
               </ul>
             </div>
             @endif
           </div>
+
           <div class="card-body">
             <table class="table table-bordered table-striped table-hover table-sm">
               <thead class="bg-primary">
                 <tr>
                   @foreach ($table->getTableHeaders() as $th)
-                    <th class="text-center" scope="col">{{ __('table.' . $th) }}</th>
+                    <th class="text-center" scope="col">{{ $th }}</th>
                   @endforeach
+                   @if ($table->getOption('without_actions') != true)
+                   <th class="text-center" scope="col">Actions</th>
+                   @endif
                 </tr>
               </thead>
               <tbody>
-                @foreach ($table as $row)
-                <tr>
-                  @foreach ($table->getTableHeaders() as $th)
-                    <td>{!! $row->{$th} !!}</td>
-                  @endforeach
-                </tr>
+                @foreach ($table->getRows() as $row)
+                  <tr>
+                    @foreach ($table->getTableColumns() as $attr)
+                      <td>{!! $row->{$attr} !!}</td>
+                    @endforeach
+
+                    <td>
+                      @if ($table->getOption('without_actions') != true)
+                        @if ($table->isShowable())
+                          <a href="{{ $table->getShowUrl() }}" class="btn btn-xs btn-info"> <i class="far fa-eye"></i></a>
+                        @endif
+                        @if ($table->isEditable())
+                          <a href="{{ $table->getEditUrl($row) }}" class="btn btn-xs btn-primary"> <i class="far fa-edit"></i></a>
+                        @endif
+                        @if ($table->isDeletable())
+                          <a class="btn btn-xs btn-danger"  href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $row->getKey() }}').submit();">
+                            <i class="fas fa-trash"></i>
+                            {{ Form::open(['url' => $table->getDeleteUrl($row), 'method' => 'DELETE', 'id' => 'delete-form-' . $row->getKey()]) }}
+                            {{ Form::close() }}
+                          </a>
+                        @endif
+                      @endif
+                    </td>
+                  </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
-          @if ($table->isNotEmpty ())
+
+          @if ($table->getRows()->isNotEmpty())
           <div class="card-footer">
-            {{ $table->links() }}
+            {{ $table->getRows()->links() }}
           </div>
           @endif
         </div>

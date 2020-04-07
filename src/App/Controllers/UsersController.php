@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Systemson\Blankboard\App\Models\User as Model;
 
 /**
- *
+ * 
  */
 class UsersController extends Controller
 {
@@ -15,4 +15,16 @@ class UsersController extends Controller
     protected $baseRoute = 'admin.users';
 
     protected $modelClass = Model::class;
+
+    /**
+     * The avaliable actions for this resource.
+     *
+     * @var array
+     */
+    protected $actions = [
+        'create',
+        //'read',
+        'update',
+        'delete',
+    ];
 }
